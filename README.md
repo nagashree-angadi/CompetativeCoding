@@ -1,2 +1,2 @@
-# CompetativeCoding
-Interview Preparation
+# Competative Coding
+
