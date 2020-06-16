@@ -1,0 +1,11 @@
+PROBLEM
+Given a sorted and rotated array, find if there is a pair with a given sum
+
+INPUT
+arr[] = {11, 15, 6, 8, 9, 10}, x = 16
+
+OUTPUT
+true
+There is a pair (6, 10) with sum 16
+
+SOLUTIONS
