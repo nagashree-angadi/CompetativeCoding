@@ -1,5 +1,5 @@
 PROBLEM
-Write a function rotate(ar[], d, n) that rotates arr[] of size n by d elements.
+Write a function rotate(ar[], d) that rotates arr[] of size n by d elements.
 
 INPUT
 arr[] = [1, 2, 3, 4, 5, 6, 7], d = 2, n =7

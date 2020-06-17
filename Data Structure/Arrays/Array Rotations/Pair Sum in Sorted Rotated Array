@@ -9,3 +9,28 @@ true
 There is a pair (6, 10) with sum 16
 
 SOLUTIONS
+    boolean pairInSortedRotated(int[] arr, int sum){
+
+        // Find the pivot point
+        int i;
+        for(i=1; i< arr.length; i++){
+            if( arr[i-i] > arr[i])
+                break;
+        }
+
+        // Find the sum using two pointers
+        int low = i;
+        int high = i-1;
+
+        while( low != high){
+            
+            if( arr[low]+arr[high] == sum )
+                return true;
+            
+            if(arr[low]+arr[high] < sum)
+                low = (low+1)% arr.length;
+            else
+                high = (arr.length+high-1)% arr.length;
+        }
+        return false;
+    } 

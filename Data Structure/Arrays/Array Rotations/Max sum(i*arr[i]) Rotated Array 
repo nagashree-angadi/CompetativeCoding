@@ -1,0 +1,59 @@
+PROBLEM
+Find maximum value of Sum( i*arr[i]) with only rotations on given array allowed.
+
+Given an array, only rotation operation is allowed on array. 
+We can rotate the array as many times as we want. 
+Return the maximum possbile of summation of i*arr[i].
+
+INPUT
+arr[] = {1, 20, 2, 10}
+
+OUTPUT
+72
+We can 72 by rotating array twice.
+{2, 10, 1, 20}
+20*3 + 1*2 + 10*1 + 2*0 = 72
+
+SOLUTION
+
+1. find the sum(i*arr[i]) for every position and then find the maximum of it.
+
+    int maxSum(int[] arr){
+        int res = Integer.MIN_VALUE;
+        for( int i=0; i< arr.length; i++){
+
+            int sum = 0;
+            for( int j = 0; j< arr.length; j++){
+                int index = (i+j)%arr.length;
+                sum += arr[j]*index;
+            }
+            res = Math.max( res, sum);
+        }
+        return res;
+    }
+
+2. The idea is to compute the value of a rotation using values of previous rotation.
+    next_val = curr_val - (cum_sum - arr[i-1]) + arr[i-1] * (n-1)
+    
+    Where,
+        next_val = Value of ∑i*arr[i] after one rotation.
+        curr_val = Current value of ∑i*arr[i] 
+        cum_sum = Sum of all array elements, i.e., ∑arr[i].
+
+    int maxSum(int[] arr){
+        int cum_sum = 0;
+        int curr_val = 0;
+        for( int i=0; i< arr.length; i++){
+            cum_sum+= arr[i];
+            curr_val += i*arr[i];
+        }
+        
+        int res = Integer.MIN_VALUE;
+        
+        for( int i=1; i< arr.length; i++){
+            int next_val = curr_val - cum_sum + arr[i-1]*arr.length;
+            curr_val = next_val;
+            res = Math.max( res, next_val);
+        }
+        return res;
+    }

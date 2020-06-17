@@ -1,5 +1,7 @@
 PROBLEM
 Find the minimum element in a sorted and rotated array
+or
+Find the Rotation Count in Rotated Sorted array
 
 INPUT
 {5, 6, 1, 2, 3, 4}
