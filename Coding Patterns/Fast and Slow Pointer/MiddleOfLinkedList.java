@@ -1,3 +1,8 @@
+/*
+* Middle of the LinkedList (easy)
+* Given the head of a Singly LinkedList, write a method to return the middle node of the LinkedList.
+* If the total number of nodes in the LinkedList is even, return the second middle node.
+* */
 
 class ListNode {
     int value = 0;
@@ -10,9 +15,14 @@ class ListNode {
 
 class MiddleOfLinkedList {
 
-    public static ListNode findMiddle(ListNode head) {
-        // TODO: Write your code here
-        return head;
+    private static ListNode findMiddle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 
     public static void main(String[] args) {
