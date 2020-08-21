@@ -19,8 +19,17 @@ class Meeting {
 class MinimumMeetingRooms {
 
     public static int findMinimumMeetingRooms(List<Meeting> meetings) {
-        // TODO: Write your code here
-        return -1;
+        Collections.sort(meetings,  (a,b) -> a.start - b.start);
+        PriorityQueue<Meeting> heap = new PriorityQueue<Meeting>(
+                (a,b) -> a.end - b.end
+        );
+
+        for(Meeting meeting: meetings){
+            if( !heap.isEmpty() && heap.peek().end <= meeting.start  )
+                heap.poll();
+            heap.add(meeting);
+        }
+        return heap.size();
     }
 
     public static void main(String[] args) {
