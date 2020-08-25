@@ -1,6 +1,7 @@
 /*
-* Level Averages in a Binary Tree (easy)
-* Given a binary tree, populate an array to represent the averages of all of its levels.
+* Right View of a Binary Tree (easy) #
+* Given a binary tree, return an array containing nodes in its right view.
+* The right view of a binary tree is the set of nodes visible when the tree is seen from the right side.
 * */
 import java.util.*;
 
@@ -14,24 +15,24 @@ class TreeNode {
     }
 };
 
-class LevelAverage {
-    public static List<Double> findLevelAverages(TreeNode root) {
-        List<Double> res = new ArrayList<Double>();
+class RightViewTree {
+    public static List<TreeNode> traverse(TreeNode root) {
+        List<TreeNode> res = new ArrayList<TreeNode>();
         Queue<TreeNode> q = new LinkedList<TreeNode>();
         q.add(root);
 
         while(!q.isEmpty()){
             int len = q.size();
-            int sum = 0;
+            TreeNode node = null;
             for( int i=0; i<len; i++) {
-                TreeNode node = q.poll();
+                node = q.poll();
                 if (node.left != null)
                     q.add(node.left);
                 if (node.right != null)
                     q.add(node.right);
-                sum += node.val;
             }
-            res.add(sum/(len*1.0));
+            if(node != null)
+                res.add(node);
         }
         return res;
     }
@@ -41,10 +42,13 @@ class LevelAverage {
         root.left = new TreeNode(7);
         root.right = new TreeNode(1);
         root.left.left = new TreeNode(9);
-        root.left.right = new TreeNode(2);
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
-        List<Double> result = LevelAverage.findLevelAverages(root);
-        System.out.print("Level averages are: " + result);
+        root.left.left.left = new TreeNode(3);
+        List<TreeNode> result = RightViewTree.traverse(root);
+        for (TreeNode node : result) {
+            System.out.print(node.val + " ");
+        }
     }
 }
+
