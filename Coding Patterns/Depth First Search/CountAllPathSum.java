@@ -18,9 +18,30 @@ class TreeNode {
 };
 
 class CountAllPathSum {
-    public static int countPaths(TreeNode root, int S) {
-        // TODO: Write your code here
-        return -1;
+    public static int countPaths(TreeNode root, int sum) {
+        List<Integer> currentPath = new LinkedList<>();
+        return helper(root, sum, currentPath);
+    }
+
+    public static int helper(TreeNode root, int sum, List<Integer> path){
+        if (root == null)
+            return 0;
+
+        path.add(root.val);
+
+        int pathCount = 0, pathSum = 0;
+        for(int i=path.size()-1; i>=0; i--) {
+            pathSum += path.get(i);
+            if (pathSum == sum) {
+                pathCount++;
+            }
+        }
+
+        pathCount += helper(root.left, sum, path);
+        pathCount += helper(root.right, sum, path);
+
+        path.remove(path.size() - 1);
+        return pathCount;
     }
 
     public static void main(String[] args) {
