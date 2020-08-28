@@ -18,9 +18,25 @@ class TreeNode {
 
 class MaximumPathSum {
 
+    private static int maximumSum = 0;
     public static int findMaximumPathSum(TreeNode root) {
-        // TODO: Write your code here
-        return -1;
+        if(root == null)
+            return 0;
+        maximumSum = Integer.MIN_VALUE;;
+        helper(root);
+        return maximumSum;
+    }
+
+    private static int helper(TreeNode root) {
+        if(root == null)
+            return 0;
+
+        int L = Math.max(helper(root.left), 0);
+        int R = Math.max(helper(root.right), 0);
+
+        maximumSum = Math.max(maximumSum, L+R+root.val);
+
+        return Math.max(L, R)+root.val;
     }
 
     public static void main(String[] args) {
