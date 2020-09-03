@@ -9,12 +9,47 @@
 
 import java.util.*;
 
+class AbbreviatedWord {
+    StringBuilder str;
+    int start;
+    int count;
+
+    public AbbreviatedWord(StringBuilder str, int start, int count) {
+        this.str = str;
+        this.start = start;
+        this.count = count;
+    }
+}
+
 class GeneralizedAbbreviation {
 
     public static List<String> generateGeneralizedAbbreviation(String word) {
-        List<String> result = new ArrayList<String>();
-        // TODO: Write your code here
-        return result;
+        List<String> res = new ArrayList<String>();
+        Queue<AbbreviatedWord> queue = new LinkedList<>();
+        queue.add(new AbbreviatedWord(new StringBuilder(), 0, 0));
+        while (!queue.isEmpty()) {
+            AbbreviatedWord temp = queue.poll();
+            if( temp.start == word.length()){
+                if( temp.count != 0)
+                    temp.str.append(temp.count);
+                res.add(temp.str.toString());
+            }else{
+                queue.add(new AbbreviatedWord(
+                        new StringBuilder(temp.str),
+                        temp.start+1,
+                        temp.count+1));
+
+                if( temp.count != 0)
+                    temp.str.append(temp.count);
+
+                queue.add(new AbbreviatedWord(
+                        new StringBuilder(temp.str).append(word.charAt(temp.start)),
+                        temp.start+1,
+                        0));
+            }
+
+        }
+        return res;
     }
 
     public static void main(String[] args) {
